@@ -1,0 +1,160 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuoteGenius AI - Fast Professional Proposals</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+        h1, h2 { margin-top: 0; }
+        label { display: block; margin: 12px 0 4px; font-weight: 600; font-size: 0.9rem; }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+        }
+        button {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+        button:hover { opacity: 0.9; }
+        .preview {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 6px;
+            white-space: pre-wrap;
+            font-family: Georgia, serif;
+            min-height: 300px;
+        }
+        .upgrade-banner {
+            grid-column: span 2;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 16px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .upgrade-banner { grid-column: span 1; flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="upgrade-banner">
+        <div>
+            <strong>⚡ Upgrade to Pro ($29/mo)</strong>
+            <p style="margin:4px 0 0; font-size: 0.85rem; color: #475569;">Unlock unlimited AI PDF exports, custom branding, and Stripe payment links.</p>
+        </div>
+        <button onclick="subscribe()" style="width: auto; padding: 8px 16px; margin: 0;">Upgrade Now</button>
+    </div>
+
+    <div class="card">
+        <h2>Job Details</h2>
+        <label>Client Name</label>
+        <input type="text" id="clientName" placeholder="e.g. Apex Auto Repair / John Doe">
+
+        <label>Service Type</label>
+        <select id="serviceType">
+            <option>Automotive Diagnostics & Electrical Repair</option>
+            <option>Audio Engineering & Vocal Mixing</option>
+            <option>Custom Software Implementation</option>
+            <option>General Contracting / Consultation</option>
+        </select>
+
+        <label>Scope of Work / Parts List</label>
+        <textarea id="scope" rows="4" placeholder="Describe the problem, parts needed, or mixing layers..."></textarea>
+
+        <label>Estimated Total Price ($)</label>
+        <input type="number" id="price" placeholder="450">
+
+        <button onclick="generateProposal()">Generate Instant Proposal</button>
+    </div>
+
+    <div class="card">
+        <h2>Proposal Preview</h2>
+        <div id="output" class="preview">Fill in the job details and click "Generate Instant Proposal" to build a professional estimate...</div>
+        <button onclick="window.print()" style="background: var(--dark);">Print / Save as PDF</button>
+    </div>
+</div>
+
+<script>
+function generateProposal() {
+    const client = document.getElementById('clientName').value || 'Valued Client';
+    const service = document.getElementById('serviceType').value;
+    const scope = document.getElementById('scope').value || 'Standard diagnostic and labor services as requested.';
+    const price = document.getElementById('price').value || '0';
+
+    const date = new Date().toLocaleDateString();
+
+    const template = `ESTIMATE & PROPOSAL
+Date: ${date}
+Prepared For: ${client}
+
+SERVICE OVERVIEW
+${service}
+
+SCOPE OF WORK & SPECIFICATIONS
+--------------------------------------------------
+${scope}
+
+TOTAL ESTIMATED COST: $${parseFloat(price).toFixed(2)}
+
+TERMS & CONDITIONS
+- Estimate valid for 30 days.
+- 50% deposit required prior to work commencement.
+- Payment accepted via credit card or digital wallet.
+
+Accepted By: ___________________________   Date: ____________`;
+
+    document.getElementById('output').textContent = template;
+}
+
+function subscribe() {
+    alert("Redirecting to payment checkout... (Connect your Stripe Checkout link here)");
+}
+</script>
+
+</body>
+</html>
