@@ -1,134 +1,154 @@
-<!Doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuoteGenius AI - Fast Professional Proposals</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --border: #e2e8f0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: var(--light);
-            color: var(--dark);
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .card {
-            background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        h1, h2 { margin-top: 0; }
-        label { display: block; margin: 12px 0 4px; font-weight: 600; font-size: 0.9rem; }
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 0.95rem;
-        }
-        button {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 16px;
-        }
-        button:hover { opacity: 0.9; }
-        .preview {
-            background: #ffffff;
-            border: 1px solid var(--border);
-            padding: 20px;
-            border-radius: 6px;
-            white-space: pre-wrap;
-            font-family: Georgia, serif;
-            min-height: 300px;
-        }
-        .upgrade-banner {
-            grid-column: span 2;
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            padding: 16px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; }
-            .upgrade-banner { grid-column: span 1; flex-direction: column; gap: 10px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuoteGenius AI - Fast Proposals</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --border: #e2e8f0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .pro-banner {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pro-banner h3 {
+      margin: 0 0 4px 0;
+      color: #1e40af;
+    }
+    .pro-banner p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #1e3a8a;
+    }
+    .btn-upgrade {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-upgrade:hover {
+      background: #1d4ed8;
+    }
+    h1, h2 { margin-top: 0; }
+    label { display: block; margin-top: 12px; font-weight: 600; }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+    button.btn-generate {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button.btn-generate:hover {
+      background: #1e293b;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      background: #f1f5f9;
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="upgrade-banner">
-        <div>
-            <strong>⚡ Upgrade to Pro ($29/mo)</strong>
-            <p style="margin:4px 0 0; font-size: 0.85rem; color: #475569;">Unlock unlimited AI PDF exports, custom branding, and Stripe payment links.</p>
-        </div>
-        <button onclick="subscribe()" style="width: auto; padding: 8px 16px; margin: 0;">Upgrade Now</button>
+  <div class="container">
+    
+    <!-- Pro Upgrade Banner -->
+    <div class="pro-banner">
+      <div>
+        <h3>⚡ Upgrade to Pro ($29/mo)</h3>
+        <p>Unlock unlimited AI PDF exports, custom branding, and Stripe payment links.</p>
+      </div>
+      <button class="btn-upgrade" onclick="subscribe()">Upgrade Now</button>
     </div>
 
+    <!-- Job Details Form -->
     <div class="card">
-        <h2>Job Details</h2>
-        <label>Client Name</label>
-        <input type="text" id="clientName" placeholder="e.g. Apex Auto Repair / John Doe">
+      <h2>Job Details</h2>
+      
+      <label for="client">Client Name</label>
+      <input type="text" id="client" placeholder="e.g. Acme Corp">
 
-        <label>Service Type</label>
-        <select id="serviceType">
-            <option>Automotive Diagnostics & Electrical Repair</option>
-            <option>Audio Engineering & Vocal Mixing</option>
-            <option>Custom Software Implementation</option>
-            <option>General Contracting / Consultation</option>
-        </select>
+      <label for="service">Service Overview</label>
+      <input type="text" id="service" placeholder="e.g. Website Redesign">
 
-        <label>Scope of Work / Parts List</label>
-        <textarea id="scope" rows="4" placeholder="Describe the problem, parts needed, or mixing layers..."></textarea>
+      <label for="scope">Scope of Work & Specifications</label>
+      <textarea id="scope" rows="4" placeholder="Describe project deliverables..."></textarea>
 
-        <label>Estimated Total Price ($)</label>
-        <input type="number" id="price" placeholder="450">
+      <label for="price">Estimated Total Price ($)</label>
+      <input type="number" id="price" placeholder="2000">
 
-        <button onclick="generateProposal()">Generate Instant Proposal</button>
+      <button class="btn-generate" onclick="generateProposal()">Generate Instant Proposal</button>
     </div>
 
+    <!-- Proposal Preview Output -->
     <div class="card">
-        <h2>Proposal Preview</h2>
-        <div id="output" class="preview">Fill in the job details and click "Generate Instant Proposal" to build a professional estimate...</div>
-        <button onclick="window.print()" style="background: var(--dark);">Print / Save as PDF</button>
+      <h2>Proposal Preview</h2>
+      <pre id="output">Fill in the details above and click Generate Instant Proposal...</pre>
     </div>
-</div>
 
-<script>
-function generateProposal() {
-    const client = document.getElementById('clientName').value || 'Valued Client';
-    const service = document.getElementById('serviceType').value;
-    const scope = document.getElementById('scope').value || 'Standard diagnostic and labor services as requested.';
-    const price = document.getElementById('price').value || '0';
+  </div>
 
-    const date = new Date().toLocaleDateString();
+  <script>
+    function generateProposal() {
+      const client = document.getElementById('client').value || '[Client Name]';
+      const service = document.getElementById('service').value || '[Service Overview]';
+      const scope = document.getElementById('scope').value || '[Scope of Work]';
+      const price = document.getElementById('price').value || '0';
 
-    const template = `ESTIMATE & PROPOSAL
+      const date = new Date().toLocaleDateString();
+
+      const template = `ESTIMATE & PROPOSAL
 Date: ${date}
 Prepared For: ${client}
 
@@ -139,19 +159,23 @@ SCOPE OF WORK & SPECIFICATIONS
 --------------------------------------------------
 ${scope}
 
-TOTAL ESTIMATED COST: $${parseFloat(price).toFixed(2)}
+TOTAL ESTIMATED COST: $${parseFloat(price).toLocaleString()}
 
 TERMS & CONDITIONS
 - Estimate valid for 30 days.
-- 50% deposit required prior to work commencement.
-- Payment accepted via credit card or digital wallet.
+- 50% deposit required prior to work start.
+- Payment accepted via credit card or bank transfer.
 
-Accepted By: ___________________________   Date: ____________`;
+Accepted By: ___________________________`;
 
-    document.getElementById('output').textContent = template
-function subscribe() {
-    alert("Redirecting to payment checkout... https://buy.stripe.com/5kQfZg5LX0UTeuo6XI9fW00
-</script
+      document.getElementById('output').textContent = template;
+    }
+
+    function subscribe() {
+      window.location.href = 'Https://buy.stripe.com/5kQfZg5LX0UTeuo6XI9fW00';
+    }
+  </script>
 
 </body>
 </html>
+
